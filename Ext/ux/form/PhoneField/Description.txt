@@ -1,0 +1,49 @@
+#Descrição para implementar Máscara de Telefone
+
+/**
+ * Arquivos Necessários
+ */
+'jquery.js',//jQuery JavaScript Library, baixar em https://jquery.com/download/
+'inputmask.js',//Próximos 2 arquivos pertencem ao Plugin jQuery, baixar em http://plugins.jquery.com/maskedinput/
+'jquery.inputmask.js',
+'phoneField.js' //Componente criado logo abaixo
+
+
+/**
+ * Campo de formulário ExtJS com máscara de telefone.
+ *
+ * Este campo estende o componente Ext.form.TextField.
+ *
+ * @author  Diego Collaço <d.collaco@gmail.com>
+ * @class  	Ext.ux.form.PhoneField
+ *          xtype: phonefield
+ * @since  	20/07/2015
+ * @see    http://plugins.jquery.com/maskedinput/
+ * @see    Ext.form.TextField
+ */
+jQuery.noConflict();
+Ext.namespace('Ext.ux.form');
+Ext.ux.form.PhoneField = Ext.extend( Ext.form.TextField, {
+   phoneFormat:'(999) 9999-9999'
+});
+Ext.ux.form.PhoneField.on('render', function() {
+	var element = this;
+	if(jQuery){
+		jQuery(function($){
+			var selector = 'input#' + element.getEl().query('input')[0].id;
+			$(selector).inputmask(element.phoneFormat, {removeMaskOnSubmit: true, "clearIncomplete": true});
+		});
+	}
+});
+Ext.reg('phonefield', Ext.ux.form.PhoneField);
+
+
+/**
+ * Criando componete de máscara de telefone
+ */
+Ext.create('Ext.ux.form.PhoneField', {
+    name: 'Telefone',
+    fieldLabel: 'Telefone',
+    //phoneFormat: 9999-9999,//Altere o formato do telefone através deste atributo
+    width: 155
+});

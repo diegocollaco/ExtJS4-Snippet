@@ -1,0 +1,16 @@
+#CSS:
+ 
+.icon {
+    background: url('icon.png') no-repeat scroll center center;/*Altere o caminho da imagem*/
+    height: 100% !important;
+    width: 100% !important;
+}
+ 
+#ExtJS:
+ 
+{
+    xtype: 'button',
+    iconCls: 'icon',
+    width: 30,/*Altere o tamanho do botão*/
+    height: 30/*Altere o tamanho do botão*/
+}

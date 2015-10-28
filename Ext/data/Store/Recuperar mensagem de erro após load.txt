@@ -1,0 +1,25 @@
+#Recuperar mensagem de erro do json de retorno após load
+
+#Através do evento load
+ 
+store.on('load', function(store, records, successful, eOpts) {
+ 
+	var obj = store.proxy.reader.rawData;
+	if (obj.success) {
+		//...
+	} else {
+		Ext.Msg.alert('Mensagem do sistema', obj.message);
+	}
+}, this);
+ 
+#Através da função callback do método load
+ 
+store.load(function(records, operation, success) {
+ 
+	var obj = Ext.decode(operation.response.responseText);
+	if (obj.success) {
+		//...
+	} else {
+		Ext.Msg.alert('Mensagem do sistema', obj.message);
+	}
+});

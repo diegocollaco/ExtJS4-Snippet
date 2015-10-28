@@ -1,0 +1,11 @@
+#Criar campo array
+
+Ext.define('MeuProjeto.model.NomeModel, {
+    extend: 'Ext.data.Model',
+    fields: [       
+        {
+            name: 'NomeCampo',
+            type: 'auto' /*O tipo auto permite inserir um array no campo*/
+        }
+    ]
+});
