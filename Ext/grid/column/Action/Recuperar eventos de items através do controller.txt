@@ -1,0 +1,54 @@
+#Recuperar eventos de items em actioncolumn através do controller
+
+**
+ * Meu Controller
+ */
+Ext.define('MeuProjeto.controller.MeuController', {
+    extend: 'Ext.app.Controller',
+    init: function() {
+        this.control({
+            'minhaView grid#idMinhaGrid actioncolumn': {
+                itemclick: function(column, action, view, rowIndex, colIndex, item, e) {
+                    if (action == 'delete') {
+                        this.removeItem(view.getStore().getAt(rowIndex));
+                    } else if (action == 'edit') {
+                        this.editItem(view.getStore().getAt(rowIndex));
+                    }
+                }
+            }
+        });
+    }
+});
+
+/**
+ * View
+ */
+Ext.define('MeuProjeto.view. MinhaView ', {
+    extend: 'Ext.window.Window',
+    alias: 'widget. minhaView,
+    initComponent: function () {
+        this.items = Ext.create('Ext.grid.Panel', {
+                        itemId: 'idMinhaGrid',
+                        columns: [
+                            {
+                                xtype: 'actioncolumn',
+                                items: [
+                                    {
+                                        iconCls: 'iconDelete',
+                                        handler: function(view, rowIndex, colIndex, item, e) {
+                                            this.fireEvent('itemclick', this, 'delete', view, rowIndex, colIndex, item, e);
+                                        }
+                                    },
+                                    {
+                                        iconCls: 'iconEdit',
+                                        handler: function(view, rowIndex, colIndex, item, e) {
+                                            this.fireEvent('itemclick', this, 'edit', view, rowIndex, colIndex, item, e);
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    });
+        this.callParent(arguments);
+    }
+});
